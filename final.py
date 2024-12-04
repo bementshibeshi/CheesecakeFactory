@@ -7,7 +7,7 @@ import os
 import csv
 import unittest
 
-def load_listing_results(html_file): 
+def load_menu_items(html_file): 
     """
     INPUT: A string containing the path of the html file
     RETURN: A list of tuples
@@ -17,25 +17,16 @@ def load_listing_results(html_file):
             content = file.read()
             soup = BeautifulSoup(content, "html.parser")
 
-            listings = []
+            product_title = []
             
-            listing_containers = soup.find_all("div", class_="c1d4ry4s dir dir-ltr")
+            food_containers = soup.find_all("div", class_="c-product-card__info__container")
             
-            for listing in listing_containers:
+            for food in food_containers:
                 title = None
-                listing_id = None
                 
-                if listing.find("h2", class_="hnwb2pb dir dir-ltr"):
-                    title = listing.find("h2", class_="hnwb2pb dir dir-ltr").text.strip()
+                if food.find("span", class_="c-product-card__name"):
+                    title = food.find("span", class_="c-product-card__name").text.strip()
                 else:
                     title = "No Title Available"
-                    
-                if listing.get("data-id"):
-                    listing_id = listing.get("data-id")
-                else:
-                    listing_id = "No ID Available"
 
-                if title != "No Title Available" and listing_id != "No ID Available":
-                    listings.append((title, listing_id))
-
-    return listings
+    return product_title
