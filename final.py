@@ -30,3 +30,15 @@ def load_menu_items(html_file):
                     title = "No Title Available"
 
     return product_title
+
+def main():
+    # Task 1: Create a BeautifulSoup object.
+    url = "https://www.thecheesecakefactory.com/menu"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        html = response.text
+        soup = BeautifulSoup(html, 'html.parser')
+    else: 
+        print("Failed to retrieve the web page.")
+        return
