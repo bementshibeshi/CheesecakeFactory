@@ -6,6 +6,7 @@ import re
 import os
 import csv
 import unittest
+import requests
 
 def load_menu_items(html_file): 
     """
