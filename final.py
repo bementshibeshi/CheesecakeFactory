@@ -27,6 +27,7 @@ def load_menu_items(html_file):
                 
                 if food.find("span", class_="c-product-card__name"):
                     title = food.find("span", class_="c-product-card__name").text.strip()
+                    print(title)
                 else:
                     title = "No Title Available"
 
@@ -43,3 +44,14 @@ def main():
     else: 
         print("Failed to retrieve the web page.")
         return
+    
+
+class TestAllFunctions(unittest.TestCase):
+    def setUp(self):
+        soup = BeautifulSoup(requests.get("https://www.thecheesecakefactory.com/menu").text, 'html.parser')
+        self.landmarks_data = load_menu_items(soup)
+
+
+if __name__ == "__main__":
+    main()
+    # unittest.main(verbosity = 2)
