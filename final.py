@@ -43,3 +43,14 @@ def main():
     else: 
         print("Failed to retrieve the web page.")
         return
+    
+
+class TestAllFunctions(unittest.TestCase):
+    def setUp(self):
+        soup = BeautifulSoup(requests.get("https://www.thecheesecakefactory.com/menu").text, 'html.parser')
+        self.landmarks_data = load_menu_items(soup)
+
+
+if __name__ == "__main__":
+    main()
+    # unittest.main(verbosity = 2)
