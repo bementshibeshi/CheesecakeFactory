@@ -23,13 +23,13 @@ def load_menu_items(html_file):
             food_containers = soup.find_all("div", class_="c-product-card__info__container")
             
             for food in food_containers:
-                title = None
-                
-                if food.find("span", class_="c-product-card__name"):
-                    title = food.find("span", class_="c-product-card__name").text.strip()
+                title = food.find("span", class_="c-product-card__name")
+                    
+                if title:
+                    product_title.append(title.text.strip())
                 else:
-                    title = "No Title Available"
-
+                    product_title.append("No Title Available")
+    print(product_title)
     return product_title
 
 def main():
