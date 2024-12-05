@@ -8,7 +8,7 @@ import csv
 import unittest
 import requests
 
-def load_menu_items(soup): 
+def load_menu_items(html_file): 
     """
     INPUT: A string containing the path of the html file
     RETURN: A list of tuples
@@ -16,6 +16,10 @@ def load_menu_items(soup):
 
  
     product_title = []
+
+    with open(html_file, "r", encoding="utf-8-sig") as file:
+        soup = BeautifulSoup(file, 'html.parser')
+    
     
     food_containers = soup.find_all("div", class_="c-product-card__info__container")
     
@@ -30,6 +34,7 @@ def load_menu_items(soup):
     print(product_title)
     return product_title
 
+    
 def main():
     # Task 1: Create a BeautifulSoup object.
     url = "https://www.thecheesecakefactory.com/menu"
@@ -45,8 +50,7 @@ def main():
 
 class TestAllFunctions(unittest.TestCase):
     def setUp(self):
-        soup = BeautifulSoup(requests.get("https://www.thecheesecakefactory.com/menu").text, 'html.parser')
-        self.menu_items = load_menu_items(soup)
+        self.menu_items = load_menu_items("cheesecakefactory_menu.html")
 
     def test_load_menu_items(self):
         
