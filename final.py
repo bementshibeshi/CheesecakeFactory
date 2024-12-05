@@ -49,9 +49,13 @@ def main():
 class TestAllFunctions(unittest.TestCase):
     def setUp(self):
         soup = BeautifulSoup(requests.get("https://www.thecheesecakefactory.com/menu").text, 'html.parser')
-        self.landmarks_data = load_menu_items(soup)
+        self.menu_items = load_menu_items(soup)
+
+    def test_load_menu_items(self):
+
+        self.assertEqual(type(self.menu_items), list)
 
 
 if __name__ == "__main__":
     main()
-    # unittest.main(verbosity = 2)
+    unittest.main(verbosity = 2)
